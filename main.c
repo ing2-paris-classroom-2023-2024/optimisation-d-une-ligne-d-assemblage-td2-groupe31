@@ -6,8 +6,6 @@
 int main () {
     Graphe *graphe;
     graphe = initGraphe();
-    printf("%d ", graphe->ordre);
-    printf("%d ", graphe->taille);
-
+    tous_les_chemins(graphe,0,34);
     return 0;
 }

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 /* affichage des successeurs du sommet num*/
 /* affichage des successeurs du sommet num*/
-void afficher_successeurs(pPred * sommet, int num)
+void afficher_successeurs(pSommet * sommet, int num)
 {
 
     printf(" sommet %d :\n",num);
@@ -27,7 +27,7 @@ void graphe_afficher(Graphe *graphe) {
     printf("listes d'adjacence :\n");
 
     for (int i = 0; i < graphe->ordre; i++) {
-        afficher_successeurs(graphe->pPred, i);
+        afficher_successeurs(graphe->pSommet, i);
         printf("\n");
     }
 }
@@ -35,7 +35,7 @@ void graphe_afficher(Graphe *graphe) {
 
 
 // Ajouter l'arête entre les sommets s1 et s2 du graphe
-pPred *CreerArete(pPred *sommet, int s1, int s2) {
+pSommet *CreerArete(pSommet *sommet, int s1, int s2) {
     if (sommet[s1]->arc == NULL) {
         pArc Newarc = (pArc) malloc(sizeof(struct Arc));
         Newarc->sommet = s2;
@@ -58,12 +58,12 @@ pPred *CreerArete(pPred *sommet, int s1, int s2) {
 // créer le graphe
 Graphe *CreerGraphe(int ordre) {
     Graphe *Newgraphe = (Graphe *) malloc(sizeof(Graphe));
-    Newgraphe->pPred = (pPred *) malloc(ordre * sizeof(pPred));
+    Newgraphe->pSommet = (pSommet *) malloc(ordre * sizeof(pSommet));
 
     for (int i = 0; i <= ordre; i++) {
-        Newgraphe->pPred[i] = (pPred) malloc(sizeof(struct Pred));
-        Newgraphe->pPred[i]->valeur = i;
-        Newgraphe->pPred[i]->arc = NULL;
+        Newgraphe->pSommet[i] = (pSommet) malloc(sizeof(struct Sommet));
+        Newgraphe->pSommet[i]->valeur = i;
+        Newgraphe->pSommet[i]->arc = NULL;
     }
     return Newgraphe;
 }
@@ -104,8 +104,8 @@ Graphe *lire_graphe(int ordre, int taille) {
     }
     // créer les arêtes du graphe
     for (int i = 0; i < taille; ++i) {
-        fscanf(fichier, "%d%d", &s1, &s2);
-        graphe->pPred=CreerArete(graphe->pPred, s2, s1);
+        fscanf(fichier, "%d%d", &s2, &s1);
+        graphe->pSommet=CreerArete(graphe->pSommet, s2, s1);
 
     }
 

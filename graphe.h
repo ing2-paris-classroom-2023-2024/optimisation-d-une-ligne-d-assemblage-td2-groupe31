@@ -22,21 +22,23 @@ struct Arc
 typedef struct Arc* pArc;
 
 /* Structure d'un sommet*/
-struct Pred
+struct Sommet
 {
-    struct Arc* arc;
+    int etat;
+    int precedence;
     int valeur;
+    struct Arc* arc;
 };
 
 /* Alias de pointeur sur un Sommet */
-typedef struct Pred* pPred;
+typedef struct Sommet* pSommet;
 
 /* Alias d'un Graphe */
 typedef struct Graphe
 {
     int taille;
     int ordre;
-    pPred* pPred;
+    pSommet* pSommet;
 } Graphe;
 
 #endif //PROJET_GRAPHE_H
