@@ -3,6 +3,6 @@ project(PROJET C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(PROJET main.c precedence.c header.h)
+add_executable(PROJET main.c precedence.c header.h graphe.h graphe.c)
 
 target_link_libraries(PROJET -lmingw32 -lalleg44)
