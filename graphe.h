@@ -26,7 +26,7 @@ struct Sommet
 {
     int etat;
     int precedence;
-    int valeur;
+    int id;
     struct Arc* arc;
 };
 

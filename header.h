@@ -2,6 +2,7 @@
 #ifndef PROJET_HEADER_H
 #define PROJET_HEADER_H
 
+
 Graphe *initGraphe ();
-void tous_les_chemins(Graphe* graphe, int depart, int arrivee);
+void precedence(Graphe* graphe);
 #endif //PROJET_HEADER_H

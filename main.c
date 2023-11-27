@@ -6,6 +6,6 @@
 int main () {
     Graphe *graphe;
     graphe = initGraphe();
-    tous_les_chemins(graphe,0,34);
+    precedence(graphe);
     return 0;
 }
