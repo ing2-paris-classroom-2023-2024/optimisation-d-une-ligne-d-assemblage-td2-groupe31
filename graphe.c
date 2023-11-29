@@ -47,7 +47,6 @@ pSommet *CreerArete(pSommet *sommet, int s1, int s2) {
         }
         i++;
     } while (fin !=2);
-    printf("s1 : %d s2 : %d\n", s1,s2);
     if (sommet[s1]->arc == NULL) {
         pArc Newarc = (pArc) malloc(sizeof(struct Arc));
         Newarc->sommet = s2;
@@ -122,9 +121,21 @@ void lire_precedence (Graphe* graphe) {
         graphe->pSommet=CreerArete(graphe->pSommet, s2, s1);
 
     }
+    fclose(fichier);
 }
 
 void lire_cycle (Graphe *graphe) {
+    int tmp;
+    FILE *fichier = NULL;
+    fichier = fopen("../operations.txt", "r");
+    if (fichier == NULL) {
+        printf("erreur");
+    }
+    for(int i = 0; i < graphe->ordre; i++) {
+        fscanf(fichier,"%d", &tmp);
+        fscanf(fichier,"%f", &graphe->pSommet[i]->duree);
+    }
+    fclose(fichier);
 
 }
 
@@ -154,12 +165,19 @@ int trouver_taille () {
     return taille;
 }
 
+void afficher_duree (Graphe *graphe) {
+    for(int i = 0; i < graphe->ordre; i++) {
+        printf("sommet %d durre %f\n", graphe->pSommet[i]->id, graphe->pSommet[i]->duree);
+    }
+}
+
 Graphe *initGraphe () {
     int ordre, taille;
     Graphe *g;
     trouver_ordre(&ordre);
     taille = trouver_taille();
     g = lire_graphe(ordre, taille);
-    graphe_afficher(g);
+    //graphe_afficher(g);
+    //afficher_duree(g);
     return g;
 }

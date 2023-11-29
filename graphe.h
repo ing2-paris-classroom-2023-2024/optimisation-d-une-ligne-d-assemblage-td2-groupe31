@@ -27,6 +27,7 @@ struct Sommet
     int etat;
     int precedence;
     int id;
+    float duree;
     struct Arc* arc;
 };
 
@@ -38,6 +39,7 @@ typedef struct Graphe
 {
     int taille;
     int ordre;
+    int cycle;
     pSommet* pSommet;
 } Graphe;
 

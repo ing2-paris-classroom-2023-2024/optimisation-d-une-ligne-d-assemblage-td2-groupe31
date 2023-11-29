@@ -32,7 +32,6 @@ void trouver_chemins(Graphe* graphe, int num, int chemins,int tab[],int index) {
             arc=arc->arc_suivant;
             if (arc != NULL) {
                 index ++;
-
             }
         }
     }
@@ -46,10 +45,13 @@ void trouver_precedence(Graphe* graphe) {
     int chemins,num = 28, tab[graphe->taille],index,max;
     for(int i = 0; i < graphe->ordre; i ++) {
         chemins = 0, index = 0, max = 0;
+
         for(int j = 0; j < graphe->taille; j ++) {
             tab[j] = 0;
         }
         trouver_chemins(graphe, i, chemins,tab, index);
+
+        //on garde le plus long chemin à chaque fois
         for (int k = 0; k < graphe->taille; k ++) {
             if (tab[k] > max && tab[k] < graphe->taille) {
                 max = tab[k];

@@ -2,7 +2,8 @@
 #include "stations.h"
 #include <stdlib.h>
 
-void station () {
+void station (Graphe *graphe, int tab[]) {
+
     //Faire les stations
     /*Usine *usine= (Usine *) malloc(sizeof(Usine));
     usine->pStation = (pStation *) malloc(tab[0] * sizeof(pStation));
