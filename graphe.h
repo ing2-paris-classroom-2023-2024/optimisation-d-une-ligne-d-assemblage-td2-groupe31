@@ -21,12 +21,20 @@ struct Arc
 /* Alias de pointeur sur un Arc */
 typedef struct Arc* pArc;
 
+struct Exclusion {
+    int sommet;
+    struct Exclusion* ex_suivant;
+};
+
+typedef struct Exclusion* pExclusion;
+
 /* Structure d'un sommet*/
 struct Sommet
 {
     int etat;
     int precedence;
     int id;
+    struct Exclusion* exclusion;
     float duree;
     struct Arc* arc;
 };

@@ -5,13 +5,13 @@
 #include <unistd.h>
 
 int main () {
-    int a;
-    menu();
-    printf("bonjour : ");
-    scanf ("%d",&a);
-    /*Graphe *graphe;
+
+
+
+
+    Graphe *graphe;
     graphe = initGraphe();
-    precedence(graphe);
-    cycle(graphe);
-    return 0;*/
+    //precedence(graphe);
+    //cycle(graphe);
+    return 0;
 }

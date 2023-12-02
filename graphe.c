@@ -83,6 +83,7 @@ Graphe *CreerGraphe(int ordre) {
             caractere = fgetc(fichier);
         }
         Newgraphe->pSommet[i]->arc = NULL;
+        Newgraphe->pSommet[i]->exclusion = NULL;
     }
     fclose(fichier);
     return Newgraphe;
@@ -139,6 +140,51 @@ void lire_cycle (Graphe *graphe) {
 
 }
 
+void lire_exclusions (Graphe * graphe) {
+    int a,b,i, fin;
+    FILE *fichier = NULL;
+    fichier = fopen("../exclusions.txt", "r");
+    if (fichier == NULL) {
+        printf("erreur");
+    }
+
+    while (fscanf(fichier, "%d %d", &a, &b) == 2) {
+        i = 0, fin = 0;
+        do {
+            if (a == graphe->pSommet[i]->id) {
+                a = i;
+                fin++;
+            }
+            if (b == graphe->pSommet[i]->id) {
+                b = i;
+                fin++;
+            }
+            i++;
+        } while (fin !=2);
+        if (graphe->pSommet[a]->exclusion == NULL) {
+            pExclusion ex = (pExclusion) malloc(sizeof(struct Exclusion));
+            ex->sommet = b;
+            ex->ex_suivant = NULL;
+            graphe->pSommet[a]->exclusion = ex;
+
+        } else {
+            pExclusion temp = graphe->pSommet[a]->exclusion;
+            while (!(temp->ex_suivant== NULL)) {
+                temp = temp->ex_suivant;
+            }
+            pExclusion ex = (pExclusion) malloc(sizeof(struct Exclusion));
+            ex->sommet = b;
+            ex->ex_suivant = NULL;
+            temp->ex_suivant = ex;
+        }
+    }
+    for(int i = 0; i <graphe->ordre; i++) {
+        if(graphe->pSommet[i]->exclusion != NULL) {
+            printf("%d %d\n", i,graphe->pSommet[i]->exclusion->sommet);
+        }
+    }
+    fclose(fichier);
+}
 
 Graphe *lire_graphe(int ordre, int taille) {
     Graphe *graphe;
@@ -147,6 +193,7 @@ Graphe *lire_graphe(int ordre, int taille) {
     graphe->taille = taille;
     lire_precedence(graphe);
     lire_cycle(graphe);
+    lire_exclusions(graphe);
     return graphe;
 }
 
@@ -170,6 +217,8 @@ void afficher_duree (Graphe *graphe) {
         printf("sommet %d durre %f\n", graphe->pSommet[i]->id, graphe->pSommet[i]->duree);
     }
 }
+
+
 
 Graphe *initGraphe () {
     int ordre, taille;
