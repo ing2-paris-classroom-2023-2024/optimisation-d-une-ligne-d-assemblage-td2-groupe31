@@ -7,8 +7,6 @@
 int main () {
 
 
-
-
     Graphe *graphe;
     graphe = initGraphe();
     //precedence(graphe);
