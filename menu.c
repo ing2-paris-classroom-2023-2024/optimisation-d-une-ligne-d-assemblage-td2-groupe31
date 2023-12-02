@@ -134,7 +134,21 @@ void flecheMenu(int x) {
 }
 
 void regles()
-{  
+{  printf("######  #######  #####  #       #######  #####     ######  #     #          # ####### #     #\n");
+    printf("#     # #       #     # #       #       #     #    #     # #     #          # #       #     #\n");
+    printf("#     # #       #       #       #       #          #     # #     #          # #       #     # \n");
+    printf("######  #####   #  #### #       #####    #####     #     # #     #          # #####   #     # \n");
+    printf("#   #   #       #     # #       #             #    #     # #     #    #     # #       #     # \n");
+    printf("#    #  #       #     # #       #       #     #    #     # #     #    #     # #       #     # \n");
+    printf("#     # #######  #####  ####### #######  #####     ######   #####      #####  #######  #####  \n");
+
+    printf("Le programme que nous avons developpe pour optimiser les lignes d'assemblage, telles que celle de la future voiture electrique ECElecar, est un outil puissant qui prend en compte diverses contraintes inherentes a la fabrication a la chaine.\n");
+    printf("Implemente en langage C par notre equipe composee de Theodore Bricout, Evan Siritham, Benoit Quaranta, et Paul Drochon, ce programme offre une solution complete pour la planification et l'optimisation des operations d'assemblage.\n\n");
+
+    printf("Voici les principales fonctionnalites de notre programme :\n");
+    printf("Gestion des Stations :\n");
+    printf("Le programme peut modeliser n'importe quelle ligne d'assemblage en considerant chaque etape d'assemblage comme une station. Chaque station est capable d'executer une ou plusieurs operations, et le programme prend en compte la flexibilite ou chaque station peut realiser n'importe quelle operation.\n\n");
+
 }
 
 void menuDemarrage() {
