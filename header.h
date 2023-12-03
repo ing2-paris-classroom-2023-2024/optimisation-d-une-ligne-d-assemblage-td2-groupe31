@@ -5,8 +5,9 @@
 
 
 Graphe *initGraphe ();
-void station (Graphe *graphe, int tab_contraintes[]);
-void cycle (Graphe *graphe);
+int get_max_stations (Graphe *graphe);
+void station (Graphe *graphe, int tab_contraintes[],int nb_contraintes);
+void cycle (Graphe *graphe,int tab_pred[], int simple);
 void precedence(Graphe* graphe,int tab[]);
 void menu();
 int exclusion(Usine *usine,Graphe *graphe, int tab[graphe->ordre]);

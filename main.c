@@ -8,9 +8,10 @@ int main () {
 
     //menu();
     Graphe *graphe;
-    int tab_contraintes[3] = {1,1,0};
+    int nb_contraintes = 3;
+    int tab_contraintes[3] = {1,1,1};
     graphe = initGraphe();
-    station(graphe,tab_contraintes);
+    station(graphe,tab_contraintes,nb_contraintes);
     //precedence(graphe);
 
     return 0;

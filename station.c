@@ -13,7 +13,7 @@ int get_max_stations (Graphe *graphe) {
     return max;
 }
 
-void verif_station(Graphe *graphe) {
+void affichage_station(Graphe *graphe) {
     for(int k =1; k <= get_max_stations(graphe); k++) {
         printf("\nStation %d : ",k);
         for(int i = 0; i <graphe->ordre; i++) {
@@ -24,7 +24,7 @@ void verif_station(Graphe *graphe) {
     }
 }
 
-void station (Graphe *graphe, int tab_contraintes[]) {
+void station (Graphe *graphe, int tab_contraintes[],int nb_contraintes) {
 
     //--------------------------------------------------------------------   Initialisation   --------------------------------------------------------------
     Usine *usine = (Usine *) malloc(sizeof(Usine));
@@ -64,7 +64,6 @@ void station (Graphe *graphe, int tab_contraintes[]) {
             operation = operation->operation_suvante;
         }
     }
-
     for(int i = 0; i < graphe->ordre; i ++) {
         printf("%d ", graphe->pSommet[tab_pred[i]]->id);
     }
@@ -72,20 +71,13 @@ void station (Graphe *graphe, int tab_contraintes[]) {
     if (tab_contraintes[1] == 1) {
         exclusion(usine,graphe, tab_pred);
     }
-
-    verif_station(graphe);
+    affichage_station(graphe);
     //Contraintes cycle
     if (tab_contraintes[2] == 1) {
-        cycle(graphe);
+        cycle(graphe,tab_pred,nb_contraintes);
     }
 
     //---------------------------------------------------------------------  Afficher les stations  ---------------------------------------------------------------------------
-
-    /*operation = usine->station->operation;
-    for(int i = 0; i < graphe->ordre; i++) {
-        printf("%d ",operation->num);
-        operation = operation->operation_suvante;
-    }*/
 
 
 
