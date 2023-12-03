@@ -5,7 +5,8 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
-
+//    HWND hwnd=GetForegroundWindow();  ligne de code servant a forcer l'ouverture de l'image en plein ecran 
+//   ShowWindow(hwnd,SW_MAXIMIZE);      nous les avons trouvé sur https://forums.commentcamarche.net/forum/affich-859862-c-c-plein-ecran 
 
 void gotoligcol( int lig, int col ) {
     COORD mycoord;
