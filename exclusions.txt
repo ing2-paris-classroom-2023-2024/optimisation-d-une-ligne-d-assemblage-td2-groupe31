@@ -1,4 +1,4 @@
-1 4 // texte pour permettre de faire les liste d'exclusion 
+1 4
 1 17
 1 20
 2 11
