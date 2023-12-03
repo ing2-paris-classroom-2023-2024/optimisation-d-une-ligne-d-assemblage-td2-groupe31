@@ -5,6 +5,8 @@
 #include <unistd.h>
 
 int main () {
+    HWND hwnd=GetForegroundWindow();
+    ShowWindow(hwnd,SW_MAXIMIZE);
 
     //menu();
     Graphe *graphe;
