@@ -1,6 +1,7 @@
 #include "header.h"
 #include "graphe.h"
 #include <stdio.h>
+
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
@@ -26,7 +27,7 @@ void afficher_menu () {
            "                                                 \\ \\/ /| |_) || | | || | | | | || |\\__ \\| (_| || |_| (_) || |   \n"
            "                                                  \\___/ | .__/  \\__||_||_| |_| |_||_||___/ \\__,_| \\__|\\___/ |_|   \n"
            "                                                        | |                                                       \n"
-           "                                                        |_|          ");
+           "                                                        |_|             ");
 
     gotoligcol(25, 70);
     printf("Appuyez sur ENTRER...");
