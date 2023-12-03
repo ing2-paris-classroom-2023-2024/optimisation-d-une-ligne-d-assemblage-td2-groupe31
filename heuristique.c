@@ -1,6 +1,7 @@
 //#include <stdio.h>
 
 // systeme qui pose simplement un compteur afin de raccourcir le temps le plus possible 
+// afin de réaliser l'hueristique on utilise un algorithme qui permet de realsier que les options demander en utilisant des algorithmes de contraintes de goupes beaucoup plus cours qui sont simplifié au maximum comme ici 
 void creerGroupes(const char fichierOperations, const charfichierTempsCible) {
     FILE fichierOp = fopen(fichierOperations, "r");
     int numero, nbGroupes = 0;
