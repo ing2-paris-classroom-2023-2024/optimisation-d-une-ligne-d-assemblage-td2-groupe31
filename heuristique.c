@@ -1,5 +1,6 @@
 //#include <stdio.h>
 
+// systeme qui pose simplement un compteur afin de raccourcir le temps le plus possible 
 void creerGroupes(const char fichierOperations, const charfichierTempsCible) {
     FILE fichierOp = fopen(fichierOperations, "r");
     int numero, nbGroupes = 0;
