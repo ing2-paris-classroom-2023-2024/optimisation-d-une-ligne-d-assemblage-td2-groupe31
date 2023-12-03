@@ -47,25 +47,43 @@ void creergroupe(Exclusion *exclusions, int numExclusions,Graphe *graphe) {
     }
 }
 
-void delete_successeurs(Graphe *graphe,pArc arc) {
+void delete_successeurs(Graphe *graphe,pArc arc,int num) {
     while (arc != NULL ) {
-        graphe->pSommet[arc->sommet]->station ++;
-        delete_successeurs(graphe,graphe->pSommet[arc->sommet]->arc);
+        graphe->pSommet[arc->sommet]->station = num+1;
+        delete_successeurs(graphe,graphe->pSommet[arc->sommet]->arc,num);
         arc = arc->arc_suivant;
     }
 }
-void placer_exclusions (Graphe *graphe, int tab_pred[]) {
-    printf("\n");
+
+int get_nb (Graphe *graphe,int num, int nb) {
+    for(int i = 0; i < graphe->ordre; i ++) {
+        if (graphe->pSommet[i]->station == num) {
+            nb ++;
+        }
+    }
+    return nb;
+}
+int placer_exclusions (Graphe *graphe, int tab_pred[],int num) {
     for(int i = 0; i < graphe->ordre; i++) {
-        if (graphe->pSommet[tab_pred[i]]->station == 1) {
+        if (graphe->pSommet[tab_pred[i]]->station == num) {
             //printf("%d\n",graphe->pSommet[tab_pred[i]]->id);
             pExclusion exclu =graphe->pSommet[tab_pred[i]]->exclusion;
             while(exclu!=NULL)
             {
-                printf("%d exclu %d\n",graphe->pSommet[tab_pred[i]]->id, graphe->pSommet[exclu->sommet]->id);
-                graphe->pSommet[exclu->sommet]->station = graphe->pSommet[tab_pred[i]]->station +1;
-                pArc arc = graphe->pSommet[exclu->sommet]->arc;
-                delete_successeurs(graphe,arc);
+                for(int j = 0; j < graphe->ordre; j++) {
+                    //Vérifier que le sommet exclu n'est pas avant dans la précédence et dans les stations
+                    if(tab_pred[i] == tab_pred[j]) {
+                        if (graphe->pSommet[exclu->sommet]->station == num) {
+                            graphe->pSommet[exclu->sommet]->station = num +1;
+                            pArc arc = graphe->pSommet[exclu->sommet]->arc;
+                            delete_successeurs(graphe,arc,num);
+                        }
+                        break;
+                    } else if(tab_pred[exclu->sommet] == tab_pred[j]) {
+                        break;
+                    }
+                }
+
                 exclu =exclu->ex_suivant;
             }
         }
@@ -121,9 +139,14 @@ int exclusion(Usine *usine, Graphe *graphe, int tab_pred[]) {
     }
 
 
+    int num = 1, nb =0;
 
     // Créer les groupes en respectant les contraintes d'exclusion
-    placer_exclusions(graphe,tab_pred);
+    do {
+        placer_exclusions(graphe,tab_pred,num);
+        nb = get_nb(graphe,num,nb);
+        num +=1;
+    }  while (nb < graphe->ordre);
     //creergroupe(exclusions, graphe->nb_exclusions,graphe);
     return 0;
 

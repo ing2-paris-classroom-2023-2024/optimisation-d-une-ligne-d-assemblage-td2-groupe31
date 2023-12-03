@@ -178,6 +178,26 @@ void lire_exclusions (Graphe * graphe) {
             ex->ex_suivant = NULL;
             temp->ex_suivant = ex;
         }
+
+        int c = a;
+        a = b;
+        b = c;
+        if (graphe->pSommet[a]->exclusion == NULL) {
+            pExclusion ex = (pExclusion) malloc(sizeof(struct Exclusion));
+            ex->sommet = b;
+            ex->ex_suivant = NULL;
+            graphe->pSommet[a]->exclusion = ex;
+
+        } else {
+            pExclusion temp = graphe->pSommet[a]->exclusion;
+            while (!(temp->ex_suivant== NULL)) {
+                temp = temp->ex_suivant;
+            }
+            pExclusion ex = (pExclusion) malloc(sizeof(struct Exclusion));
+            ex->sommet = b;
+            ex->ex_suivant = NULL;
+            temp->ex_suivant = ex;
+        }
     }
     graphe->nb_exclusions = nb;
     fclose(fichier);

@@ -3,10 +3,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void verif_station(Graphe *graphe) {
+int get_max_stations (Graphe *graphe) {
+    int max =0;
     for(int i = 0; i <graphe->ordre; i++) {
-        if (graphe->pSommet[i]->station == 1) {
-            printf("%d ",graphe->pSommet[i]->id);
+        if (graphe->pSommet[i]->station > max) {
+            max = graphe->pSommet[i]->station;
+        }
+    }
+    return max;
+}
+
+void verif_station(Graphe *graphe) {
+    for(int k =1; k <= get_max_stations(graphe); k++) {
+        printf("\nStation %d : ",k);
+        for(int i = 0; i <graphe->ordre; i++) {
+            if (graphe->pSommet[i]->station == k) {
+                printf("%d ",graphe->pSommet[i]->id);
+            }
         }
     }
 }
@@ -53,9 +66,8 @@ void station (Graphe *graphe, int tab_contraintes[]) {
     }
 
     for(int i = 0; i < graphe->ordre; i ++) {
-        printf("%d", graphe->pSommet[tab_pred[i]]->id);
+        printf("%d ", graphe->pSommet[tab_pred[i]]->id);
     }
-    printf("\n");
     //Contraintes d'exclusion
     if (tab_contraintes[1] == 1) {
         exclusion(usine,graphe, tab_pred);
