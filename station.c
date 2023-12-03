@@ -13,12 +13,17 @@ int get_max_stations (Graphe *graphe) {
     return max;
 }
 
-void affichage_station(Graphe *graphe) {
+void affichage_station(Graphe *graphe,int tab_pred[]) {
+
     for(int k =1; k <= get_max_stations(graphe); k++) {
-        printf("\nStation %d : ",k);
+        int taille =1;
+        gotoligcol(30+k, 28);
+        printf("Station %d : ",k);
         for(int i = 0; i <graphe->ordre; i++) {
-            if (graphe->pSommet[i]->station == k) {
-                printf("%d ",graphe->pSommet[i]->id);
+            if (graphe->pSommet[tab_pred[i]]->station == k) {
+                gotoligcol(30+k, 40+taille);
+                printf("%d ",graphe->pSommet[tab_pred[i]]->id);
+                taille+=3;
             }
         }
     }
@@ -50,35 +55,22 @@ void station (Graphe *graphe, int tab_contraintes[],int nb_contraintes) {
         graphe->pSommet[i]->station = 1;
     }
 
-
     //-----------------------------------------------------------------------    Contraintes   -------------------------------------------------------------------
 
     int tab_pred[graphe->ordre];
     //Contraintes de précédence
     if (tab_contraintes[0] == 1) {
-
-        precedence(graphe, tab_pred);
-        operation = usine->station->operation;
-        for(int i = 0; i < graphe->ordre; i++) {
-            operation->num = graphe->pSommet[tab_pred[i]]->id;
-            operation = operation->operation_suvante;
+        precedence(graphe, tab_pred, nb_contraintes);
+        //Contraintes d'exclusion
+        if (tab_contraintes[1] == 1) {
+            exclusion(usine, graphe, tab_pred, nb_contraintes);
         }
-    }
-    for(int i = 0; i < graphe->ordre; i ++) {
-        printf("%d ", graphe->pSommet[tab_pred[i]]->id);
-    }
-    //Contraintes d'exclusion
-    if (tab_contraintes[1] == 1) {
-        exclusion(usine,graphe, tab_pred);
-    }
-    affichage_station(graphe);
-    //Contraintes cycle
-    if (tab_contraintes[2] == 1) {
-        cycle(graphe,tab_pred,nb_contraintes);
-    }
+        //Contraintes cycle
+        if (tab_contraintes[2] == 1) {
+            cycle(graphe, tab_pred, nb_contraintes);
+        }
 
-    //---------------------------------------------------------------------  Afficher les stations  ---------------------------------------------------------------------------
-
-
+        affichage_station(graphe,tab_pred);
+    }
 
 }

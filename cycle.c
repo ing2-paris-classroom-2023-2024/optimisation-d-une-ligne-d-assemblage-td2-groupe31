@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 void cycle_simple (Graphe *graphe, int tab[]) {
-    int verif = 0, i = 0, station = 0;
+    int verif = 0, i = 0, station = 1;
     float somme = 0;
     //Tri par ordre décroissant
     for (int i = 0; i < graphe->ordre; i++) {
@@ -24,12 +24,14 @@ void cycle_simple (Graphe *graphe, int tab[]) {
             if(tab[i] !=graphe->ordre + 1 ) {
                 if (graphe->pSommet[tab[i]]->duree + somme <= graphe->cycle) {
                     somme += graphe->pSommet[tab[i]]->duree;
+                    graphe->pSommet[tab[i]]->station = station;
                     tab[i] = graphe->ordre + 1;
                 }
             }
             i++;
         } while (i < graphe->ordre);
-        printf("somme : %f\n", somme);
+        gotoligcol(30+station, 110);
+        printf("Duree: %f \n",somme);
         i=0;
         somme = 0;
         station++;
@@ -41,7 +43,6 @@ void cycle_simple (Graphe *graphe, int tab[]) {
         }
     } while (verif == 0);
 
-    printf("nb station : %d ", station);
 }
 
 void cycle_multiples (Graphe *graphe, int tab[], int tab_pred[]) {
@@ -69,16 +70,17 @@ void cycle (Graphe *graphe,int tab[], int nb_contraintes) {
                 if (graphe->pSommet[tab[k]]->station == j){
                     //printf("%d ",graphe->pSommet[tab[k]]->id);
                     if (graphe->pSommet[tab[k]]->duree + somme <= graphe->cycle ) {
-                        printf("%d ",graphe->pSommet[tab[k]]->id);
+                        //printf("%d ",graphe->pSommet[tab[k]]->id);
                         somme += graphe->pSommet[tab[k]]->duree;
                     } else {
                         station_transite[i] = tab[k];
-                        printf("%d(t) ",graphe->pSommet[tab[k]]->id);
+                        //printf("%d(t) ",graphe->pSommet[tab[k]]->id);
                         i++;
                     }
                 }
             }
-            printf("somme : %f \n",somme);
+            gotoligcol(30+j, 100);
+            printf("Duree: %f \n",somme);
             for(int k =0; k < i; k++) {
                 n=0;
                 do {

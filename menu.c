@@ -178,24 +178,30 @@ void regles()
 }
 
 void menuDemarrage() {
-    int c = 0, x = 18, tab[3] = {0};
+    int c = 0, x = 18, tab[3] = {0}, nb_contraintes = 0;
     system("cls");
-    printf("\n\n\n\n\n\n\n\n\n");
-    printf("                                                                    __  __ _____ _   _ _   _ \n"
-           "                                                                   |  \\/  | ____| \\ | | | | |\n"
-           "                                                                   | |\\/| |  _| |  \\| | | | |\n"
-           "                                                                   | |  | | |___| |\\  | |_| |\n"
-           "                                                                   |_|  |_|_____|_| \\_|\\___/");
+    gotoligcol(5,0);
+    printf(""
+           "                                                  _____         _    _             _              _               \n"
+           "                                                 |  _  |       | |  (_)           (_)            | |              \n"
+           "                                                 | | | | _ __  | |_  _  _ __ ___   _  ___   __ _ | |_  ___   _ __ \n"
+           "                                                 | | | || '_ \\ | _|| || ' ` _ \\ | |/ __| / _` || __|/ _ \\ | '__|\n"
+           "                                                 \\ \\/ /| |_) || | | || | | | | || |\\__ \\| (_| || |_| (_) || |   \n"
+           "                                                  \\___/ | .__/  \\__||_||_| |_| |_||_||___/ \\__,_| \\__|\\___/ |_|   \n"
+           "                                                         | |                                                       \n"
+           "                                                         |_|          ");
+
+    gotoligcol(25, 70);
     gotoligcol(16, 56);
     printf("Utiliser Z et S pour vous deplacer de haut en bas");
     gotoligcol(18, 72);
-    printf("Contrainte simple");
+    printf("Contraintes de precedence");
     gotoligcol(19, 72);
-    printf("Contraintes multiples");
+    printf("Contraintes d'exclusion");
     gotoligcol(20, 72);
-    printf("R");
+    printf("Contraintes de cycle");
     gotoligcol(21, 72);
-    printf("Valider");
+    printf("       Valider");
     gotoligcol(23, 63);
     printf("Appuyez sur ENTRER pour selectionner...");
     flecheMenu(x);
@@ -223,64 +229,64 @@ void menuDemarrage() {
                 if (tab[0] == 0) {
                     Color(12, 0);
                     gotoligcol(18, 72);
-                    printf("Contrainte simple");
+                    printf("Contraintes de precedence");
                     tab[0] =1;
+                    nb_contraintes ++;
                     Color(15, 0);
                 } else {
                     Color(15, 0);
                     gotoligcol(18, 72);
-                    printf("Contrainte simple");
+                    printf("Contraintes de precedence");
                     tab[0] = 0;
+                    nb_contraintes --;
                 }
             } else if (x == 19) {
                 if (tab[1] == 0) {
                     Color(12, 0);
                     gotoligcol(19, 72);
-                    printf("Contraintes multiples");
+                    printf("Contraintes d'exclusion");
                     tab[1] =1;
+                    nb_contraintes ++;
                     Color(15, 0);
                 } else {
                     Color(15, 0);
                     gotoligcol(19, 72);
-                    printf("Contraintes multiples");
+                    printf("Contraintes d'exclusion");
+                    nb_contraintes --;
                     tab[1] = 0;
                 }
             } else if (x == 20) {
                 if (tab[2] == 0) {
                     Color(12, 0);
                     gotoligcol(20, 72);
-                    printf("R");
+                    printf("Contraintes de cycle");
                     tab[2] =1;
+                    nb_contraintes ++;
                     Color(15, 0);
                 } else {
                     Color(15, 0);
                     gotoligcol(20, 72);
-                    printf("R");
+                    printf("Contraintes de cycle");
+                    nb_contraintes --;
                     tab[2] = 0;
                 }
             }  else if (x == 21) {
-                break;
+                gotoligcol(30, 23);
+                printf("                                                                                                                                                                                          ");
+                gotoligcol(31, 28);
+                printf("                                                                                                                                                                                          ");
+                gotoligcol(32, 28);
+                printf("                                                                                                                                                                                          ");
+                gotoligcol(33, 28);
+                printf("                                                                                                                                                                                          ");
+                gotoligcol(34, 28);
+                printf("                                                                                                                                                                                           ");
+                Graphe *graphe;
+                graphe = initGraphe();
+                station(graphe,tab,nb_contraintes);
             }
         }
     } while (1);
-    chargement();
-    system("cls");
-    /*if (x == 18) {
-        chargement();
-        system("cls");
-    } else if (x == 19) {
-        chargement();
-        system("cls");
-    } else if ( x == 20) {
-        system("cls");
-        c = 0;
-        do {
-            regles();
-            c = getch();
-        } while (c != 13);
-        system("cls");
-        menuDemarrage();
-    }*/
 
 }
 
