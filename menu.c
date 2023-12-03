@@ -131,6 +131,15 @@ void flecheMenu(int x) {
         gotoligcol(20, 70);
         printf("%c", 62);
     }
+    if (x == 21) {
+        Color(12, 0);
+        gotoligcol(21, 70);
+        printf("%c", 62);
+        Color(15, 0);
+    } else {
+        gotoligcol(21, 70);
+        printf("%c", 62);
+    }
 }
 
 void regles()
@@ -152,7 +161,7 @@ void regles()
 }
 
 void menuDemarrage() {
-    int c = 0, x = 18;
+    int c = 0, x = 18, tab[3] = {0};
     system("cls");
     printf("\n\n\n\n\n\n\n\n\n");
     printf("                                                                    __  __ _____ _   _ _   _ \n"
@@ -168,8 +177,10 @@ void menuDemarrage() {
     printf("Contraintes multiples");
     gotoligcol(20, 72);
     printf("R");
-    gotoligcol(22, 63);
-    printf("Appuyez sur ENTRER pour valider...");
+    gotoligcol(21, 72);
+    printf("Valider");
+    gotoligcol(23, 63);
+    printf("Appuyez sur ENTRER pour selectionner...");
     flecheMenu(x);
     do {
         gotoligcol(0,0);
@@ -179,20 +190,65 @@ void menuDemarrage() {
                 x -= 1;
                 flecheMenu(x);
             } else if (x == 18) {
-                x = 20;
+                x = 21;
                 flecheMenu(x);
             }
         } else if (c == 115) {
-            if (x < 20) {
+            if (x < 21) {
                 x += 1;
                 flecheMenu(x);
-            } else if (x == 20) {
+            } else if (x == 21) {
                 x = 18;
                 flecheMenu(x);
             }
+        } else if (c == 13) {
+            if (x == 18) {
+                if (tab[0] == 0) {
+                    Color(12, 0);
+                    gotoligcol(18, 72);
+                    printf("Contrainte simple");
+                    tab[0] =1;
+                    Color(15, 0);
+                } else {
+                    Color(15, 0);
+                    gotoligcol(18, 72);
+                    printf("Contrainte simple");
+                    tab[0] = 0;
+                }
+            } else if (x == 19) {
+                if (tab[1] == 0) {
+                    Color(12, 0);
+                    gotoligcol(19, 72);
+                    printf("Contraintes multiples");
+                    tab[1] =1;
+                    Color(15, 0);
+                } else {
+                    Color(15, 0);
+                    gotoligcol(19, 72);
+                    printf("Contraintes multiples");
+                    tab[1] = 0;
+                }
+            } else if (x == 20) {
+                if (tab[2] == 0) {
+                    Color(12, 0);
+                    gotoligcol(20, 72);
+                    printf("R");
+                    tab[2] =1;
+                    Color(15, 0);
+                } else {
+                    Color(15, 0);
+                    gotoligcol(20, 72);
+                    printf("R");
+                    tab[2] = 0;
+                }
+            }  else if (x == 21) {
+                break;
+            }
         }
-    } while (c != 13);
-    if (x == 18) {
+    } while (1);
+    chargement();
+    system("cls");
+    /*if (x == 18) {
         chargement();
         system("cls");
     } else if (x == 19) {
@@ -207,7 +263,7 @@ void menuDemarrage() {
         } while (c != 13);
         system("cls");
         menuDemarrage();
-    }
+    }*/
 
 }
 

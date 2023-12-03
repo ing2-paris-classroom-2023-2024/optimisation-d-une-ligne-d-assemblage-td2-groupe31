@@ -22,7 +22,7 @@ void cycle (Graphe *graphe) {
         do {
 
             if(tab[i] !=graphe->ordre + 1 ) {
-                if (graphe->pSommet[tab[i]]->duree + somme <= 10) {
+                if (graphe->pSommet[tab[i]]->duree + somme <= graphe->cycle) {
                     somme += graphe->pSommet[tab[i]]->duree;
                     tab[i] = graphe->ordre + 1;
                 }

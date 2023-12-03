@@ -8,6 +8,7 @@
 struct Operation
 {
     int num;
+    struct Operation *operation_suvante;
 };
 
 typedef struct Operation* pOperation;
@@ -15,15 +16,16 @@ typedef struct Operation* pOperation;
 typedef struct Station
 {
     int num;
-    pOperation *operation;
+    struct Operation *operation;
+    struct Station * station_suivant;
 
 } Station;
 
-typedef struct Station* pStation;
+typedef struct Station * pStation;
 
 typedef struct Usine
 {
-    pStation *pStation;
+    struct Station *station;
 
 } Usine;
 #endif //PROJET_STATIONS_H

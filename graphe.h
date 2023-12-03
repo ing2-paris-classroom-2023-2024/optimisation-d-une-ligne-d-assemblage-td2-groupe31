@@ -31,12 +31,12 @@ typedef struct Exclusion* pExclusion;
 /* Structure d'un sommet*/
 struct Sommet
 {
-    int etat;
     int precedence;
     int id;
     struct Exclusion* exclusion;
     float duree;
     struct Arc* arc;
+    int station;
 };
 
 /* Alias de pointeur sur un Sommet */
@@ -48,6 +48,7 @@ typedef struct Graphe
     int taille;
     int ordre;
     int cycle;
+    int nb_exclusions;
     pSommet* pSommet;
 } Graphe;
 

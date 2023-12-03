@@ -42,7 +42,7 @@ void trouver_chemins(Graphe* graphe, int num, int chemins,int tab[],int index) {
 
 // Fonction principale pour trouver tous les chemins
 void trouver_precedence(Graphe* graphe) {
-    int chemins,num = 28, tab[graphe->taille],index,max;
+    int chemins, tab[graphe->taille],index,max;
     for(int i = 0; i < graphe->ordre; i ++) {
         chemins = 0, index = 0, max = 0;
 
@@ -61,13 +61,13 @@ void trouver_precedence(Graphe* graphe) {
     }
 }
 
-void precedence (Graphe *graphe) {
-    int tab[graphe->ordre], max = 0;
+void precedence (Graphe *graphe, int tab[]) {
+
 
     trouver_precedence(graphe);
 
-    //On fait un tableau des sommets trier dans l'ordre décroissants
-    for (int i  = 0; i < graphe->ordre; i ++) {
+    // On fait un tableau des sommets triés dans l'ordre décroissant
+    for (int i = 0; i < graphe->ordre; i++) {
         tab[i] = i;
     }
     for (int i = 0; i < graphe->ordre - 1; i++) {
@@ -79,6 +79,8 @@ void precedence (Graphe *graphe) {
             }
         }
     }
+
+
 
 
 }

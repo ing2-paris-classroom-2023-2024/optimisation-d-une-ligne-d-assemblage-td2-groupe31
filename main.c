@@ -6,10 +6,12 @@
 
 int main () {
 
-
+    //menu();
     Graphe *graphe;
+    int tab_contraintes[3] = {1,1,0};
     graphe = initGraphe();
+    station(graphe,tab_contraintes);
     //precedence(graphe);
-    //cycle(graphe);
+
     return 0;
 }

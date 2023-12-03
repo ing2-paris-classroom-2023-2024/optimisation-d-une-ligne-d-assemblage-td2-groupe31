@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "graphe.h"
+#include "stations.h"
 #define MAX_OPERATIONS 35
 
 // Structure pour représenter une paire d'opérations incompatibles
@@ -8,7 +10,7 @@ typedef struct {
     int op2;
 } Exclusion;
 
-void creergroupe(Exclusion *exclusions, int numExclusions) {
+void creergroupe(Exclusion *exclusions, int numExclusions,Graphe *graphe) {
     int groups[MAX_OPERATIONS] = {0}; // init tous à 0
     int colors[MAX_OPERATIONS] = {0}; // Tab pour stocker les couleurs
 
@@ -40,21 +42,89 @@ void creergroupe(Exclusion *exclusions, int numExclusions) {
     }
 
     // Afficher les résultats
-    for (int i = 0; i < MAX_OPERATIONS; ++i) {
+    for (int i = 0; i < graphe->ordre; ++i) {
         printf("Operation %d dans le groupe %d\n", i + 1, groups[i]);
     }
 }
 
-int exclu() {
-    // Définir les contraintes d'exclusion
-    Exclusion exclusions[] = {
-            {1, 4}, {1, 17}, {1, 20}, {2, 11}, {3, 24}, {4, 15}, {5, 22},
-            {6, 24}, {8, 21}, {9, 22}, {10, 15}, {11, 31}, {12, 13}, {12, 20},
-            {15, 17}, {16, 17}, {22, 26}, {30, 33}, {31, 32}, {33, 35}
-    };
+void delete_successeurs(Graphe *graphe,pArc arc) {
+    while (arc != NULL ) {
+        graphe->pSommet[arc->sommet]->station ++;
+        delete_successeurs(graphe,graphe->pSommet[arc->sommet]->arc);
+        arc = arc->arc_suivant;
+    }
+}
+void placer_exclusions (Graphe *graphe, int tab_pred[]) {
+    printf("\n");
+    for(int i = 0; i < graphe->ordre; i++) {
+        if (graphe->pSommet[tab_pred[i]]->station == 1) {
+            //printf("%d\n",graphe->pSommet[tab_pred[i]]->id);
+            pExclusion exclu =graphe->pSommet[tab_pred[i]]->exclusion;
+            while(exclu!=NULL)
+            {
+                printf("%d exclu %d\n",graphe->pSommet[tab_pred[i]]->id, graphe->pSommet[exclu->sommet]->id);
+                graphe->pSommet[exclu->sommet]->station = graphe->pSommet[tab_pred[i]]->station +1;
+                pArc arc = graphe->pSommet[exclu->sommet]->arc;
+                delete_successeurs(graphe,arc);
+                exclu =exclu->ex_suivant;
+            }
+        }
+    }
+}
 
-    int numExclusions = sizeof(exclusions) / sizeof(Exclusion);
+int exclusion(Usine *usine, Graphe *graphe, int tab_pred[]) {
+    // Définir les contraintes d'exclusion
+    int a,b,i, fin, j =0;
+
+    //Tableau dynamique des contraintes d'exclusions
+    Exclusion* temp = (Exclusion*)malloc(graphe->nb_exclusions * sizeof(Exclusion));
+    Exclusion* temp2= (Exclusion*)malloc(graphe->nb_exclusions * sizeof(Exclusion));
+
+    FILE *fichier = NULL;
+    fichier = fopen("../exclusions.txt", "r");
+    if (fichier == NULL) {
+        printf("erreur");
+    }
+
+    while (fscanf(fichier, "%d %d", &a, &b) == 2) {
+        i = 0, fin = 0;
+        do {
+            if (a == graphe->pSommet[i]->id) {
+                a = i;
+                fin++;
+            }
+            if (b == graphe->pSommet[i]->id) {
+                b = i;
+                fin++;
+            }
+            i++;
+        } while (fin !=2);
+        temp[j].op1 = a;
+        temp[j].op2 = b;
+        temp2[j].op1 = a;
+        temp2[j].op2 = b;
+        j++;
+
+    }
+    fclose(fichier);
+    int c = 0;
+    Exclusion* exclusions= (Exclusion*)malloc(graphe->nb_exclusions * sizeof(Exclusion));
+
+    for (int k = 0; k < graphe->ordre; k ++) {
+        for(int l = 0; l < graphe->nb_exclusions; l ++) {
+            if (temp[l].op1 == tab_pred[k] ) {
+                exclusions[c].op1 = temp[l].op1;
+                exclusions[c].op2 = temp[l].op2;
+                c++;
+            }
+        }
+    }
+
+
+
     // Créer les groupes en respectant les contraintes d'exclusion
-    creergroupe(exclusions, numExclusions);
+    placer_exclusions(graphe,tab_pred);
+    //creergroupe(exclusions, graphe->nb_exclusions,graphe);
     return 0;
+
 }

@@ -119,7 +119,7 @@ void lire_precedence (Graphe* graphe) {
     // créer les arêtes du graphe
     for (int i = 0; i < graphe->taille; ++i) {
         fscanf(fichier, "%d%d", &s1, &s2);
-        graphe->pSommet=CreerArete(graphe->pSommet, s2, s1);
+        graphe->pSommet=CreerArete(graphe->pSommet, s1, s2);
 
     }
     fclose(fichier);
@@ -141,7 +141,7 @@ void lire_cycle (Graphe *graphe) {
 }
 
 void lire_exclusions (Graphe * graphe) {
-    int a,b,i, fin;
+    int a,b,i, fin,nb =0;
     FILE *fichier = NULL;
     fichier = fopen("../exclusions.txt", "r");
     if (fichier == NULL) {
@@ -149,6 +149,7 @@ void lire_exclusions (Graphe * graphe) {
     }
 
     while (fscanf(fichier, "%d %d", &a, &b) == 2) {
+        nb++;
         i = 0, fin = 0;
         do {
             if (a == graphe->pSommet[i]->id) {
@@ -178,11 +179,7 @@ void lire_exclusions (Graphe * graphe) {
             temp->ex_suivant = ex;
         }
     }
-    for(int i = 0; i <graphe->ordre; i++) {
-        if(graphe->pSommet[i]->exclusion != NULL) {
-            printf("%d %d\n", i,graphe->pSommet[i]->exclusion->sommet);
-        }
-    }
+    graphe->nb_exclusions = nb;
     fclose(fichier);
 }
 
@@ -218,7 +215,17 @@ void afficher_duree (Graphe *graphe) {
     }
 }
 
-
+int trouver_cycle (Graphe *graphe) {
+    int cycle;
+    FILE *fichier = NULL;
+    fichier = fopen("../temps_cycle.txt", "r");
+    if (fichier == NULL) {
+        printf("erreur");
+    }
+    fscanf(fichier, "%d", &cycle);
+    fclose(fichier);
+    return cycle;
+}
 
 Graphe *initGraphe () {
     int ordre, taille;
@@ -226,6 +233,7 @@ Graphe *initGraphe () {
     trouver_ordre(&ordre);
     taille = trouver_taille();
     g = lire_graphe(ordre, taille);
+    g->cycle = trouver_cycle(g);
     //graphe_afficher(g);
     //afficher_duree(g);
     return g;
