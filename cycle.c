@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 void cycle_simple (Graphe *graphe, int tab[]) {
     int verif = 0, i = 0, station = 0;
     float somme = 0;
@@ -10,6 +11,7 @@ void cycle_simple (Graphe *graphe, int tab[]) {
     for (int i = 0; i < graphe->ordre; i++) {
         tab[i] = i;
     }
+    
     for (int i = 0; i < graphe->ordre - 1; i++) {
         for (int j = 0; j < graphe->ordre - i - 1; j++) {
             if (graphe->pSommet[tab[j]]->duree < graphe->pSommet[tab[j + 1]]->duree) {
@@ -47,6 +49,7 @@ void cycle_simple (Graphe *graphe, int tab[]) {
 void cycle_multiples (Graphe *graphe, int tab[], int tab_pred[]) {
     for(int j = 0; j <= get_max_stations (graphe); j++) {
         for(int i =0; i < graphe->ordre; i ++) {
+            
             if (graphe->pSommet[tab_pred[i]]->station == j) {
 
             }
