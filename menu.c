@@ -157,6 +157,23 @@ void regles()
     printf("Voici les principales fonctionnalites de notre programme :\n");
     printf("Gestion des Stations :\n");
     printf("Le programme peut modeliser n'importe quelle ligne d'assemblage en considerant chaque etape d'assemblage comme une station. Chaque station est capable d'executer une ou plusieurs operations, et le programme prend en compte la flexibilite ou chaque station peut realiser n'importe quelle operation.\n\n");
+    printf("Contraintes d'exclusion :\n");
+    printf("Le programme prend en compte les contraintes d'exclusion entre les operations. Il garantit que certaines operations ne peuvent pas etre effectuees par la meme station, conformement aux specifications du projet. Par exemple, si une station est dediee a peindre la carrosserie, elle ne pourra pas simultanement effectuer une autre tache telle que poser le circuit electrique.\n\n");
+
+    printf("Contraintes de precedence :\n");
+    printf("Les contraintes de precedence sont prises en compte dans la planification des operations. Certaines operations doivent etre realisees avant d'autres, et le programme s'assure que ces relations sont respectees dans la sequence d'assemblage. Ces contraintes peuvent s'appliquer au sein de n'importe quel probleme de notre vie, et rend ce programme plus pousse et plus precis. \n\n");
+
+    printf("Contraintes de Temps :\n");
+    printf("Le programme integre des contraintes de temps, en particulier le temps de cycle fixe T0. Il optimise la repartition des operations sur les stations tout en respectant le temps de cycle, qui est le temps maximum par station defini. Cela garantit une efficacite maximale de la ligne d'assemblage. Dans le cadre de notre projet, T0 est de 10 secondes.\n\n");
+    printf("Flexibilite pour d'autres Projets :\n");
+    printf("Bien que le projet initial se concentre sur l'assemblage de la voiture electrique ECElecar, notre programme est concu de maniere a etre adaptable a d'autres lignes d'assemblage. Il peut etre utilise pour optimiser la production dans divers secteurs industriels.\n\n");
+
+    printf("Interface Utilisateur conviviale :\n");
+    printf("Le programme est dote d'un menu interactif permettant aux utilisateurs de fournir les informations necessaires, telles que les contraintes d'exclusion, de precedence, les temps de cycle, et les durees des operations. L'interface permet egalement d'afficher les resultats de l'optimisation.\n\n");
+
+    printf("En resume, notre equipe a cree un outil polyvalent a l'aide du langage C qui peut modeliser, planifier et optimiser des lignes d'assemblage en tenant compte de diverses contraintes. Nous sommes convaincus que ce programme contribuera significativement a l'amelioration de l'efficacite et de la productivite dans le domaine de la fabrication a la chaine.\n");
+
+    printf("\n\n\n\n----------------------Appuyez sur ENTRER pour retourner au menu----------------------");
 
 }
 
