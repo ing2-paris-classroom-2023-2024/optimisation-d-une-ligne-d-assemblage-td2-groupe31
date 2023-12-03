@@ -1,10 +1,12 @@
 #include "header.h"
 #include "graphe.h"
 #include <stdio.h>
+
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
-
+//    HWND hwnd=GetForegroundWindow();  ligne de code servant a forcer l'ouverture de l'image en plein ecran 
+//   ShowWindow(hwnd,SW_MAXIMIZE);      nous les avons trouvé sur https://forums.commentcamarche.net/forum/affich-859862-c-c-plein-ecran 
 
 void gotoligcol( int lig, int col ) {
     COORD mycoord;
@@ -26,7 +28,7 @@ void afficher_menu () {
            "                                                 \\ \\/ /| |_) || | | || | | | | || |\\__ \\| (_| || |_| (_) || |   \n"
            "                                                  \\___/ | .__/  \\__||_||_| |_| |_||_||___/ \\__,_| \\__|\\___/ |_|   \n"
            "                                                        | |                                                       \n"
-           "                                                        |_|          ");
+           "                                                        |_|             ");
 
     gotoligcol(25, 70);
     printf("Appuyez sur ENTRER...");

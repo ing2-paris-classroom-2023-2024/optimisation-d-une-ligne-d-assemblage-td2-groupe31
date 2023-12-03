@@ -5,6 +5,8 @@
 #include <unistd.h>
 #include <windows.h>
 int main () {
+    HWND hwnd=GetForegroundWindow();
+    ShowWindow(hwnd,SW_MAXIMIZE);
 
     HWND hwnd=GetForegroundWindow();
     ShowWindow(hwnd,SW_MAXIMIZE);

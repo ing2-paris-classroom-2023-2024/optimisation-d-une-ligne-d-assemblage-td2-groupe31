@@ -5,6 +5,7 @@
 #define MAX_OPERATIONS 35
 
 // Structure pour représenter une paire d'opérations incompatibles
+// dans ce code on pose un ou plusieurs graphe qui eux meme presnste le relation d'exclusion puis on recupere ces rlation dans un tableuax qui va verifier que dans les groupes il n'y ait pas d'exclusion 
 typedef struct {
     int op1;
     int op2;

@@ -8,8 +8,7 @@ Graphe *initGraphe ();
 int get_max_stations (Graphe *graphe);
 void station (Graphe *graphe, int tab_contraintes[],int nb_contraintes);
 void cycle (Graphe *graphe,int tab_pred[], int simple);
-void precedence(Graphe* graphe,int tab[],int nb_contraintes);
+void precedence(Graphe* graphe,int tab[]);
 void menu();
-void gotoligcol( int lig, int col );
-int exclusion(Usine *usine,Graphe *graphe, int tab[graphe->ordre],int nb_contraintes);
+int exclusion(Usine *usine,Graphe *graphe, int tab[graphe->ordre]);
 #endif //PROJET_HEADER_H
