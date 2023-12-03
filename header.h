@@ -11,4 +11,5 @@ void cycle (Graphe *graphe,int tab_pred[], int simple);
 void precedence(Graphe* graphe,int tab[]);
 void menu();
 int exclusion(Usine *usine,Graphe *graphe, int tab[graphe->ordre]);
+
 #endif //PROJET_HEADER_H
